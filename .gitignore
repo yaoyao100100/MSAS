@@ -1,0 +1,17 @@
+# Python bytecode
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Virtual Environment
+venv/
+env/
+.venv/
+
+# IDE and editor directories
+.vscode/
+.idea/
+
+# Other
+.env
