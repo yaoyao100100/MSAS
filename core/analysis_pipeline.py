@@ -20,16 +20,28 @@ class AnalysisPipeline:
         user_text = self.transcriber.transcribe_audio(audio_path)
         if not user_text:
             user_text = "(未能识别语音)"
-        # 将文本保存到文件 (这是 pipeline 的职责)
+        # 将文本保存到文件
         self._save_text(audio_path, user_text)
 
         # 2. 多模态情感分析
-        final_sentiment = self.analyzer.get_multimodal_sentiment(video_path, user_text)
-
-        # 从结果文件中获取详细情感信息
+        sentiment_result = self.analyzer.get_multimodal_sentiment(video_path, user_text)
+        
+        # 直接从结果中获取信息，而不是从文件读取
+        text_sentiment = sentiment_result["text_sentiment"]
+        video_emotion = sentiment_result["video_emotion"]
+        final_sentiment = sentiment_result["final_sentiment"]
+        
+        # 保存情感分析结果到文件（为了保持兼容性）
         basename = os.path.splitext(os.path.basename(video_path))[0]
         sentiment_file = os.path.join(RESULTS_DIR, f"{basename}_sentiment.txt")
-        text_sentiment, video_emotion = self._read_sentiment_details(sentiment_file)
+        try:
+            with open(sentiment_file, 'w', encoding='utf-8') as f:
+                f.write(f"Text Sentiment: {text_sentiment}\n")
+                f.write(f"Video Emotion: {video_emotion}\n")
+                f.write(f"Final Sentiment: {final_sentiment}\n")
+            print(f"情感分析结果已保存至: {sentiment_file}")
+        except Exception as e:
+            print(f"警告：保存情感分析结果文件失败: {e}")
 
         # 3. 生成AI回复
         ai_response = self.responder.generate_response(user_text, final_sentiment)
