@@ -265,8 +265,11 @@ class CameraTab(QWidget):
         # 删除"正在识别语音..."文本
         self.dialogue_box.undo()
         
-        # 添加用户文本
-        self.dialogue_box.append(f'<div style="color: #333333; font-weight: bold; margin-top: 15px;">你:</div>')
+        # 直接添加用户文本，不再添加重复的"你:"
+        # self.dialogue_box.append(f'<div style="color: #333333; font-weight: bold; margin-top: 15px;">你:</div>') 
+        # 删除这一行，因为之前已经添加过"你:"标签
+        
+        # 直接添加实际文本内容
         self.dialogue_box.append(f'<div style="color: #333333; margin-left: 20px; margin-bottom: 15px;">{user_text}</div>')
         
         # 添加情感分析结果
