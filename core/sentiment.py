@@ -142,12 +142,24 @@ class SentimentAnalyzer:
         print(f"\n--- 融合分析 ---")
         print(f"文本情感: {text_sentiment}, 视频情绪: {video_emotion}")
 
-        final_sentiment = "Neutral"
-
-        if text_sentiment == "Positive" or video_emotion in ["Happy", "Surprise"]:
+        #修改计算权重
+        text_weights = {"Positive": 1.0, "Negative": -1.0, "Neutral": 0.0}
+        video_weights = {
+            "Happy": 1, "Surprise": 0.5, "Disgust": -1.0,
+            "Sad": -0.7, "Angry": -1.0, "Fear": -0.6,
+            "Neutral": 0.1
+        }
+        # 计算加权得分
+        text_score = text_weights.get(text_sentiment, 0)
+        video_score = video_weights.get(video_emotion, 0)
+        total_score = text_score * 0.6 + video_score * 0.4  # 文本权重60%，视频40%
+        # 判定最终情感
+        if total_score >= 0.3:
             final_sentiment = "Positive"
-        elif text_sentiment == "Negative" or video_emotion in ["Sad", "Angry", "Fear"]:
+        elif total_score <= -0.3:
             final_sentiment = "Negative"
+        else:
+            final_sentiment = "Neutral"
         
         print(f"综合情感判断结果: {final_sentiment}")
         
