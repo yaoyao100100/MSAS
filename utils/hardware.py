@@ -1,3 +1,9 @@
+'''
+硬件接口 (utils/hardware.py)
+VADRecorderUI类：管理摄像头和麦克风捕获
+支持音视频数据的获取和保存
+'''
+
 import cv2
 import pyaudio
 import numpy as np
@@ -7,10 +13,11 @@ from datetime import datetime
 import os
 from PIL import Image, ImageDraw, ImageFont  # 新增导入PIL库
 
+# -------------------- VADRecorderUI类 --------------------
 class VADRecorderUI:
     """
     一个专门为PyQt5 UI设计的、非阻塞的音视频采集器。
-    UI的主循环通过反复调用 process_frame() 来驱动它。
+    UI的主循环通过反复调用 get_current_frame() 来获取最新的摄像头帧。
     """
     def __init__(self, rms_threshold=500, silence_limit=2, video_fps=20.0):
         # --- 可调参数 ---

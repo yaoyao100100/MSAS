@@ -1,0 +1,3 @@
+Text Sentiment: Positive
+Video Emotion: Neutral
+Final Sentiment: Positive

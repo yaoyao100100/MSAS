@@ -1,3 +1,11 @@
+'''
+后台工作线程 (ui/workers.py)
+ModelLoaderWorker: 加载AI模型
+HardwareSetupWorker: 初始化摄像头和麦克风
+AnalysisWorker: 分析处理视频和音频
+VideoPreprocessor: 处理上传的视频，提取音频
+'''
+
 from PyQt5.QtCore import QThread, pyqtSignal
 import os
 import subprocess

@@ -1,3 +1,9 @@
+'''
+语音转文本 (core/transcriber.py)
+使用OpenAI的Whisper模型将用户语音转换为文本
+支持音频预处理以提高识别质量
+'''
+
 import whisper
 import time
 import os
@@ -24,6 +30,7 @@ def check_ffmpeg():
         print("="*50)
         return False
 
+# -------------------- AudioTranscriber类 --------------------
 class AudioTranscriber:
     """
     一个使用OpenAI Whisper模型进行语音转文本的类。

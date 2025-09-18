@@ -1,9 +1,15 @@
+'''
+分析流水线 (core/analysis_pipeline.py)
+整合三个模块，协调完整的分析流程
+'''
+
 import os
 from .transcriber import AudioTranscriber
 from .sentiment import SentimentAnalyzer
 from .responder import LLMResponder
 from config import RESULTS_DIR
 
+# -------------------- AnalysisPipeline类 --------------------
 class AnalysisPipeline:
     def __init__(self, transcriber: AudioTranscriber, analyzer: SentimentAnalyzer, responder: LLMResponder):
         self.transcriber = transcriber

@@ -1,3 +1,9 @@
+'''
+文件分析标签页 (ui/file_tab.py)
+支持上传视频文件进行分析
+显示分析结果和AI回复
+'''
+
 from PyQt5.QtWidgets import (QWidget, QLabel, QTextEdit, QVBoxLayout, 
                             QPushButton, QHBoxLayout, QGroupBox, QFileDialog,
                             QSplitter, QFrame, QMessageBox, QApplication)
@@ -7,6 +13,7 @@ import os
 import cv2
 from ui.workers import VideoPreprocessor, AnalysisWorker
 
+# -------------------- 文件分析标签页类 --------------------
 class FileTab(QWidget):
     def __init__(self):
         super().__init__()

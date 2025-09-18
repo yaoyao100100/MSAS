@@ -1,7 +1,13 @@
+'''
+大语言模型回复 (core/responder.py)
+使用Qwen1.5-1.8B-Chat模型生成回复
+根据检测到的情感调整回复的语气和内容
+'''
+
 import os
 import warnings
 
-# --- 解决方案：抑制 TensorFlow 和 transformers 库的非关键信息 ---
+# 抑制 TensorFlow 和 transformers 库的非关键信息 ---
 # 1. 抑制 TensorFlow 的 INFO 日志
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
 os.environ['TF_ENABLE_ONEDNN_OPTS'] = '0'
@@ -14,6 +20,7 @@ from transformers import AutoModelForCausalLM, AutoTokenizer
 import time
 import config  # 导入配置模块
 
+# -------------------- LLMResponder类 --------------------
 class LLMResponder:
     """
     一个用于与大语言模型交互，根据情感生成回复的类。

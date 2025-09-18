@@ -1,8 +1,14 @@
-# ui/main_window.py
+'''
+主窗口 (ui/main_window.py)
+包含两个标签页：实时对话和文件分析
+统一管理模型加载，避免重复初始化
+'''
+
 from PyQt5.QtWidgets import QMainWindow, QTabWidget, QMessageBox
 from .camera_tab import CameraTab
 from .file_tab import FileTab
 
+# -------------------- 主窗口类 --------------------
 class MainWindow(QMainWindow):
     def __init__(self):
         super().__init__()

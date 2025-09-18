@@ -1,3 +1,8 @@
+'''
+实时对话标签页 (ui/camera_tab.py)
+提供实时摄像头预览和录制功能
+显示对话历史和情感分析结果'''
+
 from PyQt5.QtWidgets import (QWidget, QLabel, QTextEdit, QVBoxLayout, 
                              QPushButton, QHBoxLayout, QGroupBox, QSizePolicy,
                              QSplitter, QFrame, QGridLayout)
@@ -8,6 +13,7 @@ import os
 import config
 from ui.workers import ModelLoaderWorker, HardwareSetupWorker, AnalysisWorker
 
+# -------------------- 实时对话标签页类 --------------------
 class CameraTab(QWidget):
     # 定义信号，用于传递加载好的模型给其他标签页
     models_loaded_signal = pyqtSignal(object, object, object)

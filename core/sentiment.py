@@ -1,13 +1,20 @@
+'''
+情感分析 (core/sentiment.py)
+文本情感分析：使用Erlangshen-Roberta模型
+视频情绪识别：使用FER(Facial Emotion Recognition)分析面部表情
+多模态融合：综合文本和视频的情感结果
+'''
+
 import os
-# --- 解决方案：在导入TensorFlow之前，设置环境变量来抑制其提示信息 ---
+# 在导入TensorFlow之前，设置环境变量来抑制其提示信息 ---
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
 os.environ['TF_ENABLE_ONEDNN_OPTS'] = '0'
 
-# --- 新增解决方案：导入warnings库并过滤掉特定的Keras UserWarning ---
+# 导入warnings库并过滤掉特定的Keras UserWarning ---
 import warnings
 # 我们只忽略这条特定的、来自Keras的、关于输入结构不匹配的警告
 warnings.filterwarnings('ignore', message='The structure of `inputs` doesn\'t match the expected structure.*')
-# --- 修改结束 ---
+
 
 import torch
 from transformers import BertTokenizer, BertForSequenceClassification
@@ -18,6 +25,7 @@ import time
 import shutil # 用于文件操作
 import config  # 导入配置模块
 
+# -------------------- SentimentAnalyzer类 --------------------
 class SentimentAnalyzer:
     """
     一个结合文本和视频进行多模态情感分析的类。
@@ -173,7 +181,7 @@ class SentimentAnalyzer:
                 except OSError as e:
                     print(f"清理 '{output_dir}' 文件夹时出错: {e}")
 
-# --- 主程序入口 ---
+# --- 主程序入口，用于独立测试此模块 ---
 if __name__ == '__main__':
     try:
         analyzer = SentimentAnalyzer()

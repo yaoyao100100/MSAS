@@ -1,3 +1,8 @@
+'''
+清理工具 (utils/cleanup.py)
+清理results文件夹中的临时文件
+'''
+
 import os
 import shutil
 import sys

@@ -17,6 +17,109 @@
 - **对话生成**：基于Qwen1.5-1.8B-Chat模型
 - **前端界面**：使用PyQt5构建的桌面应用
 
+## 使用的开源模型
+
+1. OpenAI Whisper
+
+* 用途：语音转文本
+* 官方网址：https://github.com/openai/whisper
+* 使用的版本：medium
+
+2. Erlangshen-Roberta-110M-Sentiment
+
+* 用途：文本情感分析
+* 官方网址：https://huggingface.co/IDEA-CCNL/Erlangshen-Roberta-110M-Sentiment
+* 模型由中国华为开源
+
+3. FER (Facial Emotion Recognition)
+
+* 用途：面部表情情绪识别
+* 官方网址：https://github.com/justinshenk/fer
+* 基于TensorFlow和OpenCV实现
+
+4. Qwen1.5-1.8B-Chat
+
+* 用途：生成AI回复
+* 官方网址：https://huggingface.co/Qwen/Qwen1.5-1.8B-Chat
+* 模型由清华大学开源
+
+## 使用的主要开源库
+
+1. PyQt5
+
+* 用途：构建图形用户界面
+* 官方网址：https://www.riverbankcomputing.com/software/pyqt/
+
+2. OpenCV-Python
+
+* 用途：摄像头视频处理和图像分析
+* 官方网址：https://github.com/opencv/opencv-python
+
+3. PyAudio
+
+* 用途：麦克风音频采集
+* 官方网址：https://github.com/jleb/pyaudio
+
+4. FFmpeg
+
+* 用途：音视频处理
+* 官方网址：https://ffmpeg.org/
+
+5. Transformers
+
+* 用途：加载和使用预训练模型
+* 官方网址：https://github.com/huggingface/transformers
+
+6. PyTorch
+
+* 用途：深度学习框架
+* 官方网址：https://pytorch.org/
+
+7. TensorFlow
+
+* 用途：面部情绪识别
+* 官方网址：https://www.tensorflow.org/
+
+## 项目结构
+
+```
+MSAS/
+├── main.py                 # 程序入口
+├── config.py               # 配置文件
+├── core/                   # 核心功能模块
+│   ├── transcriber.py      # 语音转文本
+│   ├── sentiment.py        # 情感分析
+│   ├── responder.py        # 大语言模型回复
+│   └── analysis_pipeline.py # 分析流程
+├── ui/                     # 用户界面
+│   ├── main_window.py      # 主窗口
+│   ├── camera_tab.py       # 实时对话标签页
+│   ├── file_tab.py         # 文件分析标签页
+│   └── workers.py          # 后台工作线程
+└── utils/                  # 实用工具
+    ├── hardware.py         # 硬件接口
+    └── cleanup.py          # 清理工具
+```
+
+## 系统流程
+
+1. 数据采集阶段：
+
+* 实时模式：通过摄像头和麦克风采集视频和音频数据
+* 文件模式：上传视频文件，提取音频
+
+2. 处理分析阶段：
+
+* 使用Whisper模型将音频转换为文本
+* 使用Erlangshen-Roberta模型分析文本情感
+* 使用FER模型分析视频中的面部表情
+* 融合文本情感和视频情绪得出最终情感判断
+
+3. 响应生成阶段：
+
+* 基于用户文本和情感状态，使用Qwen模型生成适应性回复
+* 展示分析结果和AI回复
+
 ## 安装指南
 
 ### 环境要求
@@ -90,27 +193,6 @@ python main.py
 3. 点击"开始分析"按钮
 4. 查看分析结果和AI回复
 5. 可以通过"清空结果"按钮清除当前分析结果
-
-## 项目结构
-
-```
-MSAS/
-├── main.py                 # 程序入口
-├── config.py               # 配置文件
-├── core/                   # 核心功能模块
-│   ├── transcriber.py      # 语音转文本
-│   ├── sentiment.py        # 情感分析
-│   ├── responder.py        # 大语言模型回复
-│   └── analysis_pipeline.py # 分析流程
-├── ui/                     # 用户界面
-│   ├── main_window.py      # 主窗口
-│   ├── camera_tab.py       # 实时对话标签页
-│   ├── file_tab.py         # 文件分析标签页
-│   └── workers.py          # 后台工作线程
-└── utils/                  # 实用工具
-    ├── hardware.py         # 硬件接口
-    └── cleanup.py          # 清理工具
-```
 
 ## 注意事项
 
